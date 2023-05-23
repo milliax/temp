@@ -4,45 +4,28 @@
 using namespace std;
 
 signed main() {
-    int cases = 0;
-    int n;
     int temp;
-    int result;
-
-    int i = 1;
-    bool is_possitive;
-    int negative[30];
-    int ptr;
+    int maxn;
+    int index = 1;
+    int input[30];
 
     while (cin >> temp) {
-        result = 1;
-        is_possitive = false;
-        ptr = 0;
+        maxn = 0;
+
+        for (int i = 0; i < temp; ++i) cin >> input[i];
 
         for (int i = 0; i < temp; ++i) {
-            cin >> n;
-            if (n > 0) {
-                is_possitive = true;
-                result *= n;
-            } else {
-                negative[ptr++] = n;
+            int product_sum = 1;
+            for (int j = i; j < temp; ++j) {
+                product_sum *= input[j];
+                if (product_sum > maxn) {
+                    maxn = product_sum;
+                }
             }
         }
 
-        sort(negative, negative + ptr);
-
-        if (ptr % 2) {
-            for (int j = 0; j < ptr - 1; ++j) {
-                result *= negative[j];
-            }
-        } else {
-            for (int j = 0; j < ptr; ++j) {
-                result *= negative[j];
-            }
-        }
-
-        cout << "Case #" << i++ << ": The maximum product is "
-             << (is_possitive ? result : 0) << "." << endl
+        cout << "Case #" << index++ << ": The maximum product is " << maxn
+             << "." << endl
              << endl;
     }
 
